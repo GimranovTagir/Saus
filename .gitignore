@@ -5,6 +5,7 @@ target/
 .kotlin
 
 .idea/
+
 .idea/idea/compiler.xml
 .idea/jarRepositories.xml
 .idea/workspace.xml
