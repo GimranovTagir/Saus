@@ -14,7 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
@@ -28,6 +27,4 @@
             <version>4.38.0</version>
         </dependency>
     </dependencies>
-
-
 </project>
