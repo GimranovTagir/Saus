@@ -1,36 +1,59 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
+
     @Test
-    public void firstLogin() {
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("user-name")).sendKeys(Keys.CONTROL + "A");
-        driver.findElement(By.id("user-name")).sendKeys(Keys.BACK_SPACE);
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.xpath("//*[@data-test='password']")).sendKeys("secret_sauce");
-        driver.findElement(By.cssSelector("[name = 'login-button']")).click();
-        boolean titleIsDisplayed = driver.findElement(By.cssSelector("[data-test='title']")).isDisplayed();
-        assertTrue(titleIsDisplayed);
-        String titleName = driver.findElement(By.cssSelector("[data-test='title']")).getText();
-        assertEquals(titleName, "Products");
+    public void correctLogin() {
+        loginPage.open();
+        loginPage.login("standard_user", "secret_sauce");
+
+        assertTrue(productPage.isTitleIsDisplayed(), "Заголовок не виден");
+        assertEquals(productPage.getTitle(), "Products", "Не верный заголовок");
     }
 
     @Test
     public void incorrectLogin() {
-        driver.findElement(By.id("user-name")).sendKeys("locked_out_user");
-        driver.findElement(By.xpath("//*[@data-test='password']")).sendKeys("secret_sauce");
-        driver.findElement(By.cssSelector("[name='login-button']")).click();
-        boolean errorIsDisplayed = driver.findElement(By.cssSelector("[data-test='error']")).isDisplayed();
-        assertTrue(errorIsDisplayed, "Нет сообщения об ошибке");
-        String errorMsg = driver.findElement(By.cssSelector("[data-test='error']")).getText();
-        assertEquals(errorMsg, "Epic sadface: Sorry, this user has been locked out.",
+        loginPage.open();
+        loginPage.login("locked_out_user", "secret_sauce");
+
+        assertTrue(loginPage.isErrorDisplayed(), "Нет сообщения об ошибке");
+        assertEquals(loginPage.getErrorText(), "Epic sadface: Sorry, this user has been locked out.",
+                "Не верный текст сообщенияя об ошибке");
+    }
+
+    @Test
+    public void emptyLogin() {
+        loginPage.open();
+        loginPage.login("", "secret_sauce");
+
+        assertTrue(loginPage.isErrorDisplayed(), "Нет сообщения об ошибке");
+        assertEquals(loginPage.getErrorText(), "Epic sadface: Username is required",
+                "Не верный текст сообщенияя об ошибке");
+    }
+
+    @Test
+    public void withoutPassword() {
+        loginPage.open();
+        loginPage.login("standard_user", "");
+
+        assertTrue(loginPage.isErrorDisplayed(), "Нет сообщения об ошибке");
+        assertEquals(loginPage.getErrorText(), "Epic sadface: Password is required",
+                "Не верный текст сообщенияя об ошибке");
+    }
+
+    @Test
+    public void upLogin() {
+        loginPage.open();
+        loginPage.login("Standard_user", "secret_sauce");
+
+        assertTrue(loginPage.isErrorDisplayed(), "Нет сообщения об ошибке");
+        assertEquals(loginPage.getErrorText(),
+                "Epic sadface: Username and password do not match any user in this service",
                 "Не верный текст сообщенияя об ошибке");
     }
 }
