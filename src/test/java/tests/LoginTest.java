@@ -14,7 +14,7 @@ public class LoginTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
 
         assertTrue(productPage.isTitleIsDisplayed(), "Заголовок не виден");
-        //assertEquals(productPage.getTitle(), "Products", "Не верный заголовок");
+        assertEquals(productPage.getTitle(), "Products", "Не верный заголовок");
     }
 
     @DataProvider(name = "incorrectLoginData")

@@ -6,7 +6,8 @@ import org.openqa.selenium.WebDriver;
 import javax.xml.namespace.QName;
 
 public class ProductsPage extends BasePage {
-    private static final String ADD_TO_CART_PATTERN = "//*[text()='%s']//ancestor::div[@class='inventory_item']//child::button[text()='Add to cart']";
+    private static final String ADD_TO_CART_PATTERN =
+            "//*[text()='%s']//ancestor::div[@class='inventory_item']//child::button[text()='Add to cart']";
     private final By title = By.cssSelector("[data-test='title']");
     private final By cartCounter = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-badge"));
 

@@ -15,7 +15,6 @@ public class ProductsTest extends BaseTest {
         productPage.addGoodsToCarts("Sauce Labs Fleece Jacket");
         productPage.addGoodsToCarts("Test.allTheThings() T-Shirt (Red)");
         assertEquals(productPage.checkCounterValue(), "3");
-        assertEquals(productPage.checkCounterColorValue(),"rgba(226, 35, 26, 1)");
+        assertEquals(productPage.checkCounterColors(),"rgba(266,34,26,1)");
     }
 }
-
