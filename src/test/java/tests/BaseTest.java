@@ -33,6 +33,6 @@ public class BaseTest {
 
     @AfterMethod
     public void closeBrowser() {
-        //browser.quit();
+        browser.quit();
     }
 }
