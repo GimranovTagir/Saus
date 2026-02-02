@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 import javax.xml.namespace.QName;
 
-public class ProductsPage extends BasePage {
+public class  ProductsPage extends BasePage {
     private static final String ADD_TO_CART_PATTERN =
             "//*[text()='%s']//ancestor::div[@class='inventory_item']//child::button[text()='Add to cart']";
-    private final By title = By.cssSelector("[data-test='title']");
+    private final By title = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
     private final By cartCounter = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-badge"));
+    private final By cartLink = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-link"));
 
 
     public ProductsPage(WebDriver driver) {
@@ -20,13 +21,14 @@ public class ProductsPage extends BasePage {
         return driver.findElement(title).isDisplayed();
     }
 
-    public String getTitle() {
-        return driver.findElement(title).getText();
-    }
-
     public void addGoodsToCarts(String goodsName) {
         By addToCart = By.xpath(ADD_TO_CART_PATTERN.formatted(goodsName));
         driver.findElement(addToCart).click();
+    }
+
+    public void addGoodToCart(int goodsIndex) {
+        driver.findElements(By.xpath("//*[text()='Add to cart']")).get(goodsIndex).click();
+
     }
 
     public String checkCounterValue() {
@@ -35,5 +37,8 @@ public class ProductsPage extends BasePage {
 
     public String checkCounterColorValue() {
         return driver.findElement(cartCounter).getCssValue("background-color");
+    }
+    public void switchToCart() {
+         driver.findElement(cartLink).click();
     }
 }
