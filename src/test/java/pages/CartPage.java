@@ -24,8 +24,6 @@ public class CartPage extends BasePage {
             names.add(product.getText());
         }
 
-
         return names;
     }
 }
-

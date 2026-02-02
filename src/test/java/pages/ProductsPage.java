@@ -3,9 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import javax.xml.namespace.QName;
-
-public class  ProductsPage extends BasePage {
+public class ProductsPage extends BasePage {
     private static final String ADD_TO_CART_PATTERN =
             "//*[text()='%s']//ancestor::div[@class='inventory_item']//child::button[text()='Add to cart']";
     private final By title = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
@@ -38,7 +36,8 @@ public class  ProductsPage extends BasePage {
     public String checkCounterColorValue() {
         return driver.findElement(cartCounter).getCssValue("background-color");
     }
+
     public void switchToCart() {
-         driver.findElement(cartLink).click();
+        driver.findElement(cartLink).click();
     }
 }

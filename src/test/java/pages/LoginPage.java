@@ -3,8 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import javax.xml.transform.sax.SAXResult;
-
 public class LoginPage extends BasePage {
 
     private final By loginInput = By.id("user-name");
@@ -25,6 +23,7 @@ public class LoginPage extends BasePage {
         fillPasswordField(password);
         driver.findElement(loginButton).click();
     }
+
     public void fillLoginField(String user) {
         driver.findElement(loginInput).sendKeys(user);
     }

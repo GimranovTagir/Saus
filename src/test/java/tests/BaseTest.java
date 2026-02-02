@@ -31,7 +31,7 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         productPage = new ProductsPage(driver);
-        cartPage= new CartPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @AfterMethod

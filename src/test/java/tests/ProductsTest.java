@@ -1,6 +1,5 @@
 package tests;
 
-import net.bytebuddy.implementation.EqualsMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -19,12 +18,12 @@ public class ProductsTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
         assertEquals(productPage.checkTitleName(), "Products");
         assertTrue(productPage.isTitleIsDisplayed());
-        for (int i=0; i < goodList.size(); i++){
+        for (int i = 0; i < goodList.size(); i++) {
             productPage.addGoodsToCarts(goodList.get(i));
         }
         productPage.addGoodToCart(2);
 
         assertEquals(productPage.checkCounterValue(), "4");
-        assertEquals(productPage.checkCounterColorValue(),"rgba(266,34,26,1)");
+        assertEquals(productPage.checkCounterColorValue(), "rgba(266,34,26,1)");
     }
 }
