@@ -10,7 +10,6 @@ public class ProductsPage extends BasePage {
     private final By cartCounter = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-badge"));
     private final By cartLink = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-link"));
 
-
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
@@ -26,7 +25,6 @@ public class ProductsPage extends BasePage {
 
     public void addGoodToCart(int goodsIndex) {
         driver.findElements(By.xpath("//*[text()='Add to cart']")).get(goodsIndex).click();
-
     }
 
     public String checkCounterValue() {

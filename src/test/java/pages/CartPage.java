@@ -10,7 +10,6 @@ import java.util.List;
 public class CartPage extends BasePage {
     By product = By.cssSelector(".inventory_item_name");
 
-
     public CartPage(WebDriver driver) {
         super(driver);
     }
