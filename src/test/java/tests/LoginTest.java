@@ -3,8 +3,9 @@ package tests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 
 public class LoginTest extends BaseTest {
 
@@ -14,7 +15,7 @@ public class LoginTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
 
         assertTrue(productPage.isTitleIsDisplayed(), "Заголовок не виден");
-        assertEquals(productPage.getTitle(), "Products", "Не верный заголовок");
+        assertEquals(productPage.checkCounterValue(), "Products", "Не верный заголовок");
     }
 
     @DataProvider(name = "incorrectLoginData")

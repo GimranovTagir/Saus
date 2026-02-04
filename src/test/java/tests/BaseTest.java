@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -14,6 +15,7 @@ public class BaseTest {
     public WebDriver driver;
     LoginPage loginPage;
     ProductsPage productPage;
+    CartPage cartPage;
 
     @BeforeMethod
     public void setup() {
@@ -22,17 +24,18 @@ public class BaseTest {
         options.addArguments("start-maximized");
         options.addArguments("--guest");
         //options.addArguments("headless");
-        options.addArguments("--windows-size=1920,1080");
+        //options.addArguments("--windows-size=1920,1080");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
         //browser.manage().window().maximize();
 
         loginPage = new LoginPage(driver);
         productPage = new ProductsPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @AfterMethod
     public void closeBrowser() {
-        browser.quit();
+        driver.quit();
     }
 }
