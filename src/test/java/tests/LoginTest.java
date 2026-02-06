@@ -1,21 +1,23 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.AllureUtils;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
 
 public class LoginTest extends BaseTest {
 
     @Test()
     public void correctLogin() {
+        System.out.println("LoginTest.correct !!!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
 
         assertTrue(productPage.isTitleIsDisplayed(), "Заголовок не виден");
-        assertEquals(productPage.checkCounterValue(), "Products", "Не верный заголовок");
+        assertEquals(productPage.checkTitleName(), "Products", "Не верный заголовок");
     }
 
     @DataProvider(name = "incorrectLoginData")
@@ -28,12 +30,22 @@ public class LoginTest extends BaseTest {
         };
     }
 
+    @Epic("Тетстирование интернет-площадки")
+    @Feature("Проверка расчета скидки")
+    @Story("FFFg")
+    @Severity(SeverityLevel.BLOCKER)
+    @Owner("Gimranov Tagir @SilverWig")
+    @TmsLink("Saus")
+    @Issue("Auto_1")
     @Test(dataProvider = "incorrectLoginData", description = "тест проверяет авторизацию заюлокированного пользователя")
     public void incorrectLogin(String user, String password, String errorMsg) {
+        System.out.println("LoginTest.incorrect !!!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
         loginPage.login(user, password);
 
         assertTrue(loginPage.isErrorDisplayed(), "Нет сообщения об ошибке");
+        //AllureUtils.takeScreenshot(driver);
         assertEquals(loginPage.getErrorText(), errorMsg, "Не верный текст сообщенияя об ошибке");
+
     }
 }
