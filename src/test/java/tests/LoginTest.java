@@ -3,8 +3,8 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import utils.AllureUtils;
 
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
         loginPage.login(user, password);
 
         assertTrue(productPage.isTitleIsDisplayed(), "Заголовок не виден");
-        assertEquals(productPage.checkTitleName(), "Products", "Не верный заголовок");
+        assertEquals(productPage.checkTitleName(), PRODUCTS.getDisplayName(), "Не верный заголовок");
     }
 
     @DataProvider(name = "incorrectLoginData")
@@ -26,7 +26,8 @@ public class LoginTest extends BaseTest {
                 {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
                 {"", "secret_sauce", "Epic sadface: Username is required"},
                 {"standard_user", "", "Epic sadface: Password is required"},
-                {"Standard_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service"}
+                {"Standard_user", "secret_sauce",
+                        "Epic sadface: Username and password do not match any user in this service"}
         };
     }
 

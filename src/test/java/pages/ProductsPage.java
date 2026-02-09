@@ -24,10 +24,12 @@ public class ProductsPage extends BasePage {
         By addToCart = By.xpath(ADD_TO_CART_PATTERN.formatted(goodsName));
         driver.findElement(addToCart).click();
     }
+
     @Step("Добавляет товар по названию")
     public void addGoodToCart(int goodsIndex) {
         driver.findElements(By.xpath("//*[text()='Add to cart']")).get(goodsIndex).click();
     }
+
     @Step("Проверяет сколько товаров по кнопке корзины")
     public String checkCounterValue() {
         return driver.findElement(cartCounter).getText();

@@ -4,6 +4,8 @@ import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 
+import static enums.TitleNaming.CART;
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.*;
 
 
@@ -19,16 +21,16 @@ public class CartTest extends BaseTest {
     @Issue("Auto_1")
     @Test
     public void checkGoodsAdded() {
-        System.out.println("CartTest.incorrect !!!!! in thread: "+Thread.currentThread().threadId());
+        System.out.println("CartTest.incorrect !!!!! in thread: " + Thread.currentThread().threadId());
 
         loginPage.open();
-        loginPage.login(user,password);
-        assertEquals(productPage.checkTitleName(), "Products");
+        loginPage.login(user, password);
+        assertEquals(productPage.checkTitleName(), PRODUCTS.getDisplayName());
 
         productPage.addGoodsToCarts(goodsName);
         productPage.switchToCart();
 
-        assertEquals(cartPage.checkTitleName(), "Your Cart");
+        assertEquals(cartPage.checkTitleName(), CART.getDisplayName());
 
         assertFalse(cartPage.getProductsNames().isEmpty());
         assertEquals(cartPage.getProductsNames().size(), 1);
